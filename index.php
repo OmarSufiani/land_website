@@ -6,19 +6,21 @@ include 'includes/header.php';
 $sql = "SELECT id, image, details, price, location FROM plots ORDER BY id DESC";
 $result = $conn->query($sql);
 ?>
-
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <!-- 🚀 Image Carousel -->
 <div id="plotCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
   <div class="carousel-inner">
     <!-- Replace these with your images -->
     <div class="carousel-item active">
-      <img src="images/plot1.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 1">
+      <img src="uploads/images/plot1.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 1">
     </div>
     <div class="carousel-item">
-      <img src="images/plot2.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 2">
+      <img src="uploads/images/plot2.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 2">
     </div>
     <div class="carousel-item">
-      <img src="images/plot3.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 3">
+      <img src="uploads/images/plot3.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 3">
     </div>
   </div>
 </div>
@@ -32,7 +34,9 @@ $result = $conn->query($sql);
       <?php while ($row = $result->fetch_assoc()): ?>
         <div class="col-md-4">
           <div class="card shadow h-100">
-            <img src="<?= htmlspecialchars($row['image']) ?>" class="card-img-top" alt="Plot Image" style="height:200px; object-fit:cover;">
+<img src="uploads/images/<?= htmlspecialchars(basename($row['image'])) ?>" 
+     class="card-img-top" 
+     alt="Plot Image">
             <div class="card-body">
               <h5 class="card-title"><?= htmlspecialchars($row['location']) ?></h5>
               <p class="card-text"><strong>Price:</strong> <?= htmlspecialchars($row['price']) ?></p>

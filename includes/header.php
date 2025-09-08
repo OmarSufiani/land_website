@@ -1,9 +1,9 @@
 
 
 <head>
-  <meta charset="UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adval Properties</title>
+ 
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
 <header class="bg-light shadow-sm sticky-top" style="z-index: 1030;">
   <div class="container d-flex justify-content-between align-items-center py-3">
     <!-- Logo/Company -->
-    <h2 class="m-0 text-primary">AdvalProperties Limited</h2>
+    <h2 class="m-0 text-primary">H.Salim AdvalProperties Limited</h2>
 
     <!-- Navigation -->
     <nav>
@@ -89,6 +89,6 @@
 
 <!-- ✅ Banner / Slogan -->
 <div class="bg-teal text-white text-center py-4">
-  <h3 class="m-0">Affordable Plots Of Land For Sale In Kwale, Mombasa and Kilifi Kenya</h3>
+  <h3 class="m-0">Affordable Plots Of Land For Sale In Diani Kenya</h3>
 </div>
 

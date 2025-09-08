@@ -1,16 +1,37 @@
 <?php
 session_start();
-include '../databases/db.php'; // your database connection
+include '../databases/db.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
 
 $message = "";
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $image     = trim($_POST['image']);
     $details   = trim($_POST['details']);
     $price     = trim($_POST['price']);
     $location  = trim($_POST['location']);
-    $video_url = trim($_POST['video_url']);
+
+    // Handle image upload
+    $image = "";
+    if (!empty($_FILES['image']['name'])) {
+        $targetDir = "../uploads/images/";
+        if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
+        $image = $targetDir . time() . "_" . basename($_FILES['image']['name']);
+        move_uploaded_file($_FILES['image']['tmp_name'], $image);
+    }
+
+    // Handle video upload
+    $video_url = "";
+    if (!empty($_FILES['video_url']['name'])) {
+        $targetDir = "../uploads/videos/";
+        if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
+        $video_url = $targetDir . time() . "_" . basename($_FILES['video_url']['name']);
+        move_uploaded_file($_FILES['video_url']['tmp_name'], $video_url);
+    }
 
     // ✅ Check for duplicates (based on details + location)
     $stmt = $conn->prepare("SELECT id FROM plots WHERE details = ? AND location = ?");
@@ -36,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-
+<html>
 <head>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Add Plot</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -50,10 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h3 class="mb-4 text-primary">Add New Plot</h3>
     <?= $message ?>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
       <div class="mb-3">
-        <label class="form-label">Image URL</label>
-        <input type="text" name="image" class="form-control" required>
+        <label class="form-label">Image</label>
+        <input type="file" name="image" class="form-control" accept="image/*" required>
       </div>
       <div class="mb-3">
         <label class="form-label">Details</label>
@@ -68,12 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="location" class="form-control" required>
       </div>
       <div class="mb-3">
-        <label class="form-label">Video URL</label>
-        <input type="text" name="video_url" class="form-control">
+        <label class="form-label">Video</label>
+        <input type="file" name="video_url" class="form-control" accept="video/*">
       </div>
- <button type="submit" class="btn btn-primary">Add Plot</button>
-<a href="dashboard.php" class="btn btn-secondary">Cancel</a>
-
+      <button type="submit" class="btn btn-primary">Add Plot</button>
+      <a href="dashboard.php" class="btn btn-secondary">Cancel</a>
     </form>
   </div>
 </div>
