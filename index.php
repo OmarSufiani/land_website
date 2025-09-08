@@ -11,19 +11,20 @@ $result = $conn->query($sql);
 </head>
 <!-- 🚀 Image Carousel -->
 <div id="plotCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-  <div class="carousel-inner">
+  <div class="carousel-inner text-center">
     <!-- Replace these with your images -->
     <div class="carousel-item active">
-      <img src="uploads/images/plot1.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 1">
+      <img src="uploads/images/plot1.jpg" class="d-block mx-auto img-fluid" alt="Plot 1">
     </div>
     <div class="carousel-item">
-      <img src="uploads/images/plot2.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 2">
+      <img src="uploads/images/plot2.jpg" class="d-block mx-auto img-fluid" alt="Plot 2">
     </div>
     <div class="carousel-item">
-      <img src="uploads/images/plot3.jpg" class="d-block w-100" style="height:400px; object-fit:cover;" alt="Plot 3">
+      <img src="uploads/images/plot3.jpg" class="d-block mx-auto img-fluid" alt="Plot 3">
     </div>
   </div>
 </div>
+
 
 <!-- 🚀 Plots in Cards -->
 <div class="container my-5">
@@ -54,5 +55,6 @@ $result = $conn->query($sql);
 
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <?php include 'includes/footer.php'; ?>
